@@ -24,14 +24,15 @@ port_assignment_url="http://209.222.18.222:2000/?client_id=$pia_client_id"
 pia_response=$(curl -s -f "$port_assignment_url")
 pia_curl_exit_code=$?
 
+# error 52 is empty response, probably happens when Port forwarding is already enabled
+# so it is tolerated here
 if [[ -z "$pia_response" ]]; then
     echo "Port forwarding is already activated on this connection, has expired, or you are not connected to a PIA region that supports port forwarding"
+    exit 0
 fi
 
 # Check for curl error (curl will fail on HTTP errors with -f flag)
-# error 52 is empty response, probably happens when Port forwarding is already enabled
-# so it is tolerated here
-if [[ ${pia_curl_exit_code} -ne 52 || ${pia_curl_exit_code} -ne 0 ]]; then
+if [[ ${pia_curl_exit_code} -ne 0 ]]; then
     echo "curl encountered an error looking up new port: $pia_curl_exit_code"
     exit
 fi
