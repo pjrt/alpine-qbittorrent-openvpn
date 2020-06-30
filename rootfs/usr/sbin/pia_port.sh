@@ -29,7 +29,9 @@ if [[ -z "$pia_response" ]]; then
 fi
 
 # Check for curl error (curl will fail on HTTP errors with -f flag)
-if [[ ${pia_curl_exit_code} -ne 0 ]]; then
+# error 52 is empty response, probably happens when Port forwarding is already enabled
+# so it is tolerated here
+if [[ ${pia_curl_exit_code} -ne 52 || ${pia_curl_exit_code} -ne 0 ]]; then
     echo "curl encountered an error looking up new port: $pia_curl_exit_code"
     exit
 fi
