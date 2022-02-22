@@ -39,6 +39,7 @@ RUN addgroup -S openvpn \
     sudo \
     subversion \
     jq \
+    unrar \
     && apk add --no-cache s6-overlay \
     && setcap cap_net_admin+ep "$(which openvpn)" \
     && apk del libcap --purge \
