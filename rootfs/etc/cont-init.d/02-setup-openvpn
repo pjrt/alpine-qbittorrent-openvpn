@@ -42,8 +42,13 @@ else
     # Download all OpenVPN configurations from this provider
     (
         # shellcheck disable=SC2164
+        cd "/tmp"
+        git clone -n --dept=1 --filter=tree:0 https://github.com/haugene/vpn-configs-contrib
+        cd vpn-configs-contrib
+        git sparse-checkout set --no-cone openvpn/${lowercase_openvpn_provider}
+        git checkout
+        mv openvpn/* /etc/openvpn/
         cd "/etc/openvpn"
-        svn export "https://github.com/haugene/vpn-configs-contrib.git/trunk/openvpn/${lowercase_openvpn_provider}" --force
     )
 
     if [ -x "/etc/openvpn/${lowercase_openvpn_provider}/configure-openvpn.sh" ]; then

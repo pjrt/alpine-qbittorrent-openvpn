@@ -37,7 +37,7 @@ RUN addgroup -S openvpn \
     iptables \
     libcap \
     sudo \
-    subversion \
+    git \
     jq \
     unrar \
     && apk add --no-cache s6-overlay \
