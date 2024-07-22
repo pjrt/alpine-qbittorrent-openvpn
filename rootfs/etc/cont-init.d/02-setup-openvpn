@@ -49,6 +49,7 @@ else
         git checkout
         mv openvpn/* /etc/openvpn/
         cd "/etc/openvpn"
+        rm -rf "/tmp/vpn-configs-contrib"
     )
 
     if [ -x "/etc/openvpn/${lowercase_openvpn_provider}/configure-openvpn.sh" ]; then
