@@ -42,6 +42,7 @@ else
     # Download all OpenVPN configurations from this provider
     (
         # shellcheck disable=SC2164
+        rm -rf /etc/openvpn/ # cleanup
         cd "/tmp"
         git clone -n --dept=1 --filter=tree:0 https://github.com/haugene/vpn-configs-contrib
         cd vpn-configs-contrib
